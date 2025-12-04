@@ -9,3 +9,10 @@ After taking some real life interviews, there are some tips on how to spend the 
 * Memorize main algorithms! Have no time to develop them.
 * For data structures as such graphs, avoid storing distances to others in the class, use the strategy pattern class for that
 * For graphs, understand how to make use of Maps
+
+## Running TypeScript based solutions
+
+```bash
+npm run build 
+npm start
+```

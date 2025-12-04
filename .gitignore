@@ -19,3 +19,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Typescript
+node_modules/

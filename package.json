@@ -1,0 +1,18 @@
+{
+  "name": "helloworld",
+  "version": "1.0.0",
+  "description": "## Hello world",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/main/typescript/co/cubestudio/graphs/NetflixProblem1DeepFirstTraversalSolution.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
