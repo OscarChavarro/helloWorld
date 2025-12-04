@@ -8,7 +8,7 @@ import java.util.Set;
 public final class NetflixProblem1DeepFirstTraversalSolution {
     private NetflixProblem1DeepFirstTraversalSolution() {}
 
-    int minNumberOfSemesters(int n, int[][] prerequisites) {
+    private int minNumberOfSemesters(int n, int[][] prerequisites) {
         if (n == 0) {
             return 0;
         }

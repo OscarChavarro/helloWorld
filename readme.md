@@ -1,5 +1,8 @@
 # Leet-code trainning examples
 
+This repository contains basic Leet-code type exercises for data structures and algorithms currently used in real interviews.
+Several can be used as the first exposure to a specific object, thus the `helloWorld` name.
+
 ## How to go fast
 
 After taking some real life interviews, there are some tips on how to spend the less amount of time possible:
