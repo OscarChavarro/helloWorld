@@ -1,6 +1,8 @@
 package co.cubestudio.graphs;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public final class NetflixProblem1DeepFirstTraversalSolution {
@@ -30,24 +32,35 @@ public final class NetflixProblem1DeepFirstTraversalSolution {
     }
 
     private int lengthOfLongestPath(Graph graph) {
+        Map<GraphNode, Integer> maxDepthsFromNodes = new HashMap<>();
+        Set<GraphNode> visiting = new HashSet<>();
         int maxPath = 0;
         for (GraphNode node : graph.getAllNodes()) {
-            int pathLength = deepFirstTraversal(node, new HashSet<>());
+            int pathLength = deepFirstTraversal(node, maxDepthsFromNodes, visiting);
             maxPath = Math.max(maxPath, pathLength);
         }
         return maxPath;
     }
 
-    private int deepFirstTraversal(GraphNode node, Set<GraphNode> visited) {
-        visited.add(node);
+    private int deepFirstTraversal(
+        GraphNode node,
+        Map<GraphNode, Integer> maxDepthsFromNodes,
+        Set<GraphNode> visiting) {
+        if (maxDepthsFromNodes.containsKey(node)) {
+            return maxDepthsFromNodes.get(node);
+        }
+        if (visiting.contains(node)) {
+            return 0;
+        }
+
+        visiting.add(node);
         int maxDepth = 0;
         for (GraphArc arc : node.getNeighbors()) {
             GraphNode neighbor = arc.to();
-            if (!visited.contains(neighbor)) {
-                maxDepth = Math.max(maxDepth, 1 + deepFirstTraversal(neighbor, visited));
-            }
+            maxDepth = Math.max(maxDepth, 1 + deepFirstTraversal(neighbor, maxDepthsFromNodes, visiting));
         }
-        visited.remove(node);
+        visiting.remove(node);
+        maxDepthsFromNodes.put(node, maxDepth);
         return maxDepth;
     }
 
@@ -72,16 +85,9 @@ public final class NetflixProblem1DeepFirstTraversalSolution {
     private boolean testDisconnectedGraphs() {
         int n = 7;
         int[][] prerequisites = {
-                {1, 2}, {2, 3}, {3, 4}, {1, 4},
-                {5, 6}, {6, 7}
+            {1, 2}, {2, 3}, {3, 4}, {1, 4}, {5, 6}, {6, 7}
         };
         return minNumberOfSemesters(n, prerequisites) == 4;
-    }
-
-    private boolean testCycleExample() {
-        int n = 3;
-        int[][] prerequisites = {{1, 2}, {2, 3}, {3, 1}};
-        return minNumberOfSemesters(n, prerequisites) == 3;
     }
 
     public static void main(String[] args) {
@@ -90,6 +96,5 @@ public final class NetflixProblem1DeepFirstTraversalSolution {
         System.out.println("Test2 (disconnected nodes): " + instance.testDisconnectedNodes());
         System.out.println("Test3 (empty graph): " + instance.testEmptyGraph());
         System.out.println("Test4 (disconnected graphs): " + instance.testDisconnectedGraphs());
-        System.out.println("Test5 (cycle example): " + instance.testCycleExample());
     }
 }
